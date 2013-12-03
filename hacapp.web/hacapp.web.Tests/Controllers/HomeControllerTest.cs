@@ -50,5 +50,12 @@ namespace hacapp.web.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+
+        [TestMethod]
+        public void ShouldFail()
+        {
+            // Assert
+            Assert.IsNotNull(null);
+        }
     }
 }
