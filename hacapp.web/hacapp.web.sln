@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hacapp.web", "hacapp.web\ha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hacapp.web.Tests", "hacapp.web.Tests\hacapp.web.Tests.csproj", "{2DC8235D-8938-467D-A947-8CE4DD69FC20}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2E91854E-DBB0-4736-9C44-EFF54B2CB516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

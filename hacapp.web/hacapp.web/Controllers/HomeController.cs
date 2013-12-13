@@ -11,7 +11,14 @@ namespace hacapp.web.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            if (ControllerContext.HttpContext.Request.IsAuthenticated)
+            {
+                ViewBag.Message = "Welcome back " + ControllerContext.HttpContext.User.Identity.Name;
+                return View();
+            }
+
+            ViewBag.Message = "Welcome to HACCAPP. Please log in to continue.";
+            return RedirectToAction("Account/Login");
         }
 
         [AllowAnonymous]

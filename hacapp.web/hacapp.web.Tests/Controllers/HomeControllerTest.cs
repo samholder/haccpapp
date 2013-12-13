@@ -13,19 +13,6 @@ namespace hacapp.web.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
         public void About()
         {
             // Arrange
