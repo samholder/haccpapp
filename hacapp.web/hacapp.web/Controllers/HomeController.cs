@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace hacapp.web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
-    {
-        [AllowAnonymous]
+    {        
         public ActionResult Index()
         {
             if (ControllerContext.HttpContext.Request.IsAuthenticated)

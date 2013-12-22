@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using hacapp.web.Tests.Common.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using hacapp.web;
 using hacapp.web.Controllers;
@@ -12,30 +13,26 @@ namespace hacapp.web.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
-        [TestMethod]
-        public void About()
+        [TestClass]
+        public class TheIndexMethod
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+            [TestMethod]
+            public void ShouldBeDecoratedWithTheAuthorizeAttribute()
+            {
+                bool allowsAuthorizedAccessOnly = false;
+                allowsAuthorizedAccessOnly = typeof(HomeController).AllowsOnlyAuthorizedAccessToMethod("Index");
+                Assert.IsTrue(allowsAuthorizedAccessOnly, "No AuthorizeAttribute restriction found on Index() method");
+            }            
         }
 
-        [TestMethod]
-        public void Contact()
+        [TestClass]
+        public class TheAboutMethod : HomeControllerTest
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            [TestMethod]
+            public void ShouldAllowAnonymousAccess()
+            {
+                Assert.IsFalse(typeof(HomeController).AllowsOnlyAuthorizedAccessToMethod("About"), "No anonymous access to the about method allowed");
+            }
         }
     }
 }
