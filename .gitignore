@@ -45,6 +45,7 @@ build/
 *.pidb
 *.log
 *.scc
+*.orig
 
 # Visual C++ cache files
 ipch/
@@ -75,6 +76,8 @@ _TeamCity*
 # NCrunch
 *.ncrunch*
 .*crunch*.local.xml
+*nCrunchTemp*
+_NCrunch
 
 # Installshield output folder
 [Ee]xpress/
@@ -154,3 +157,6 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/hacapp.web/_NCrunch_hacapp.web/StoredText
+*.mdf
+*.ldf

@@ -1,0 +1,28 @@
+﻿@model List<Hacapp.Web.Models.Team.TeamDetailsViewModel>
+
+@{
+    ViewBag.Title="Teams";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>My Teams</h2>
+    </div>
+</div>
+@foreach (var team in Model)
+{
+    <div class="row">
+        <div class="col-md-4">
+            @Html.ActionLink(@team.Name, "Details", new { Id = team.Id })
+            @if (team.IsEditable)
+            {
+                @Html.ActionLink("Delete team", "Delete", new { Id = team.Id }, new { Class = "btn btn-xs btn-default" })
+            }
+        </div>
+    </div>
+}
+<div class="row">
+    @Html.ActionLink("Join another team", "Join", null, new { Class = "btn btn-default btn-sm" })
+</div>
+
+

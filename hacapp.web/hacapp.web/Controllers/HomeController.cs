@@ -1,24 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
+using hacapp.contracts.Commands;
+using Hacapp.Core.Queries;
+using Hacapp.Core.Queries.Result;
+using Hacapp.Web.Models;
+using Haccapp.Model.Domain;
+using Microsoft.AspNet.Identity;
 
 namespace hacapp.web.Controllers
 {
     [Authorize]
     public class HomeController : Controller
-    {        
+    {
+        private readonly ICommandAndQueryDispatcher dispatcher;
+
+        public HomeController(ICommandAndQueryDispatcher dispatcher)
+        {
+            this.dispatcher = dispatcher;
+        }
+
         public ActionResult Index()
         {
-            if (ControllerContext.HttpContext.Request.IsAuthenticated)
+            string userId = HttpContext.User.Identity.GetUserId();
+            IEnumerable<Team> teams =
+                dispatcher.ExecuteQuery(new GetUserTeamsQuery(userId));
+            if (!teams.Any())
             {
-                ViewBag.Message = "Welcome back " + ControllerContext.HttpContext.User.Identity.Name;
-                return View();
+                return RedirectToAction("Index", "Team");
             }
 
-            ViewBag.Message = "Welcome to HACCAPP. Please log in to continue.";
-            return RedirectToAction("Account/Login");
+            ViewBag.Message = "Welcome " + ControllerContext.HttpContext.User.Identity.Name;
+            IEnumerable<PendingMembershipResult> pendingMemberships =
+                dispatcher.ExecuteQuery(new GetPendingMembershipsForUsersTeamsQuery(userId));
+            var model = new HomePageViewModel
+            {
+                PendingMemberships =
+                    Mapper.Map<IEnumerable<PendingMembershipResult>, List<PendingMembershipModel>>(pendingMemberships)
+            };
+
+            return View(model);
         }
 
         [AllowAnonymous]

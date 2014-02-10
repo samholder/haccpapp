@@ -36,8 +36,24 @@
     <Reference Include="BuildingBlocks.Mvc.FluentAssertions">
       <HintPath>..\packages\BuildingBlocks.Mvc.FluentAssertions.1.0.0.62\lib\net40\BuildingBlocks.Mvc.FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\packages\FluentAssertions.2.1.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentAssertions.2.2.0.0\lib\net45\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -46,6 +62,13 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=2.4.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Diagnostics">
+      <HintPath>..\packages\SimpleInjector.2.4.0\lib\net45\SimpleInjector.Diagnostics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -98,10 +121,45 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Extensions\TypeExtensions.cs" />
+    <Compile Include="Features\HomePage\HomePage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HomePage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\HomePage\HomePageSteps.cs" />
+    <Compile Include="Features\Teams\CommonSteps.cs" />
+    <Compile Include="Features\Teams\CreateANewTeam.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateANewTeam.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Login\UserLoginSteps.cs" />
+    <Compile Include="Features\CurrentScenarioContext.cs" />
+    <Compile Include="Features\Teams\DeleteTeam.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteTeam.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Teams\JoinATeam.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JoinATeam.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Teams\TeamDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Teams\TeamMembership.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TeamMembership.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Teams\TeamSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="UserLogin.feature.cs">
+    <Compile Include="TestHelper.cs" />
+    <Compile Include="Features\Login\UserLogin.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UserLogin.feature</DependentUpon>
@@ -111,17 +169,68 @@
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Features\HomePage\HomePage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>HomePage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Teams\CreateANewTeam.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateANewTeam.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Teams\DeleteTeam.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteTeam.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Teams\JoinATeam.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>JoinATeam.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Teams\TeamDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TeamDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Teams\TeamMembership.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TeamMembership.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
-    <None Include="UserLogin.feature">
+    <None Include="Features\Login\UserLogin.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UserLogin.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\hacapp.web\hacapp.web.csproj">
-      <Project>{D4792F90-73B2-47A4-92CF-4CFEF1CA2571}</Project>
-      <Name>hacapp.web</Name>
+    <ProjectReference Include="..\hacapp.contracts\Hacapp.Contracts.csproj">
+      <Project>{0A01520A-83F2-41F3-B2DE-B3AAA0A861B4}</Project>
+      <Name>Hacapp.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\hacapp.core\Hacapp.Core.csproj">
+      <Project>{38A957ED-6237-439D-93AC-220BFD7D0409}</Project>
+      <Name>Hacapp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hacapp.data\Hacapp.Data.csproj">
+      <Project>{2282989C-3FAB-404C-BF85-3BE9A5228E23}</Project>
+      <Name>Hacapp.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hacapp.Web.Models\Hacapp.Web.Models.csproj">
+      <Project>{E9399E7B-5C32-4B5E-B8F5-BE6CF8AAAF3E}</Project>
+      <Name>Hacapp.Web.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hacapp.web\Hacapp.Web.csproj">
+      <Project>{D4792F90-73B2-47A4-92CF-4CFEF1CA2571}</Project>
+      <Name>Hacapp.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Haccapp.Model\Haccapp.Model.csproj">
+      <Project>{1f19b069-bbef-4c41-b2a1-845893f87586}</Project>
+      <Name>Haccapp.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NCrunch.Generator.SpecflowPlugin\NCrunch.Generator.SpecflowPlugin.csproj">
+      <Project>{9f70195c-261c-4ab6-8ce3-9a1e09f82e72}</Project>
+      <Name>NCrunch.Generator.SpecflowPlugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

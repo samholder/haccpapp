@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using System.Web.Http;
+using Microsoft.Owin;
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(hacapp.web.Startup))]
@@ -9,6 +10,10 @@ namespace hacapp.web
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+   
+//            var webApiConfiguration = new HttpConfiguration();
+//            WebApiConfig.Register(webApiConfiguration);
+//            app.UseWebApi(webApiConfiguration);
         }
     }
 }

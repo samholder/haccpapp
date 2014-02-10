@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Getting Started";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h1>@ViewBag.Message</h1>
+        <h2>Getting started</h2>
+        <p>
+            You have not yet created or joined a team. A team is a collection of 1 or more people who will 
+            participate in the management of the processes that are defined.
+        </p>
+        <p>
+            If you are the owner of the processes then you will want to create a new team.  
+            If you work for someone who uses this app to manage their processes then you will 
+            want to join a team.
+        </p>        
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.ActionLink("Create a new team", "Create", "Team", null, new {Class="btn btn-default"})
+        @Html.ActionLink("Join an existing team", "Join", "Team", null, new { Class = "btn btn-default" })
+    </div>
+</div>
+

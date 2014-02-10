@@ -1,0 +1,89 @@
+﻿@using System.Activities.Statements
+@using Hacapp.Web.Models.Team
+@model Hacapp.Web.Models.Team.TeamDetailsViewModel
+
+@{
+    ViewBag.Title="Team Details ";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Team Details for the team @Model.Name</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <h3>Team Owner</h3>
+        <p>@Model.Owner.UserName</p>
+    </div>
+</div>
+
+@if (Model.ConfirmedMembers.Any())
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Confirmed members</h3>
+        </div>
+    </div>
+    foreach (var user in Model.ConfirmedMembers)
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <p>@user.UserName</p>                
+            </div>
+        @if (Model.IsEditable)
+        {
+            <div class="col-md-4">
+                @Html.ActionLink("Remove user", "UpdateMembership", "Team", new {idOfUserToUpdate = @user.Id, teamId = @Model.Id, newStatus = UserMembershipStatus.Removed}, new { Class="btn btn-sm btn-default"})
+            </div>
+        }
+        </div>
+    }
+}
+@if(Model.PendingMembers.Any())
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Pending members</h3>
+        </div>
+    </div>
+    foreach (var user in Model.PendingMembers)
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <p>@user.UserName</p>                
+            </div>
+        @if (Model.IsEditable)
+        {
+            <div class="col-md-4">
+                @Html.ActionLink("Remove user", "UpdateMembership", "Team", new {idOfUserToUpdate = @user.Id, teamId = @Model.Id, newStatus = UserMembershipStatus.Removed}, new { Class="btn btn-sm btn-default"})
+                @Html.ActionLink("Confirm user membership", "UpdateMembership", "Team", new { idOfUserToUpdate = @user.Id, teamId = @Model.Id, newStatus = UserMembershipStatus.Confirmed }, new { Class = "btn btn-sm btn-default" })
+            </div>
+        }
+        </div>
+    }
+}
+@if (Model.SuspendedMembers.Any())
+{
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Confirmed members</h3>
+        </div>
+    </div>
+    foreach (var user in Model.SuspendedMembers)
+    {
+        <div class="row">
+            <div class="col-md-2">
+                <p>@user.UserName</p>                
+            </div>
+        @if (Model.IsEditable)
+        {
+            <div class="col-md-2">
+                @Html.ActionLink("Remove user", "UpdateMembership", "Team", new {idOfUserToUpdate = @user.Id, teamId = @Model.Id, newStatus = UserMembershipStatus.Removed}, new { Class="btn btn-sm btn-default"})
+                @Html.ActionLink("Confirm user membership", "UpdateMembership", "Team", new { idOfUserToUpdate = @user.Id, teamId = @Model.Id, newStatus = UserMembershipStatus.Confirmed }, new { Class = "btn btn-sm btn-default" })
+            </div>
+        }
+        </div>        
+    }
+}
